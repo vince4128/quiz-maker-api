@@ -3,7 +3,10 @@ const   express         = require("express"),
         mongoose        = require("mongoose"),
         multer          = require("multer"),
         serverConfig    = require("./server/server.config"),
-        serverConnect   = require("./server/server.connect")
+        serverConnect   = require("./server/server.connect"),
+        routes          = require("./routes");
 
 serverConfig.config(app);
 serverConnect.connect();
+
+app.use("/", routes.quizRoute);
