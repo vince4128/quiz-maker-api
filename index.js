@@ -9,4 +9,5 @@ const   express         = require("express"),
 serverConfig.config(app);
 serverConnect.connect();
 
+app.use("/category", routes.categoryRoute);
 app.use("/", routes.quizRoute);

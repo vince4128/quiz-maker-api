@@ -1,7 +1,9 @@
-const quizRoute      = require("./quiz.route");
+const   quizRoute      = require("./quiz.route"),
+        categoryRoute  = require("./category.route");
 
 module.exports = {
 
-    quizRoute
+    quizRoute,
+    categoryRoute
 
 }
