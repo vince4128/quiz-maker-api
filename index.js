@@ -11,4 +11,5 @@ serverConnect.connect();
 
 app.use("/category", routes.categoryRoute);
 app.use("/user", routes.userRoute);
+app.use("/image", routes.imageRoute);
 app.use("/", routes.quizRoute);
