@@ -1,11 +1,11 @@
 const   express = require("express"),
         router  = express.Router({mergeParams:true}),        
-        Quiz    = require("../models/index");
+        Quiz    = require("../models/Quiz.model");
 
-//Index show all quiz
+// Index show all quiz
 router.get("/", (req,res)=>{
     //get all otem from db
-    Item.find({}, (err, allQuiz)=>{
+    Quiz.find({}, (err, allQuiz)=>{
         if(err){
             console.log(err)
         }else{
@@ -41,3 +41,42 @@ router.post("/", (req,res)=>{
     })
 
 });
+
+// show a quiz
+router.get("/:id", (req,res)=>{
+    //find the item with the provided ID
+    Quiz.findById(req.params.id, (err, foundQuiz)=>{
+        if(err){
+            console.log(err);
+        }else{
+            console.log(foundQuiz);
+            res.send(foundQuiz);
+        }
+    });
+})
+
+// update a quiz
+router.put("/:id", (req,res)=>{    
+    Quiz.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedQuiz)=>{
+        if(err){
+            console.log(err);
+        }else{
+            console.log(updatedQuiz);
+            res.send(updatedQuiz);
+        }
+    });
+});
+
+// delete a quiz
+router.delete("/:id", (req,res)=>{
+    Quiz.findByIdAndRemove(req.params.id, (err)=>{
+        if(err){
+            console.log(err);
+        }else{
+            console.log("deleted");
+            res.send(`deleted ${req.params.id}`);
+        }
+    })
+})
+
+module.exports = router;
