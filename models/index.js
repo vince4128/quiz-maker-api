@@ -1,8 +1,13 @@
-const Quiz      = require("./Quiz.model"),
-const Category  = require("./Category.model");
+const   Quiz      = require("./Quiz.model"),
+        Category  = require("./Category.model"),
+        User      = require("./User.model"),
+        Image     = require("./Image.model");
 
 module.exports = {
 
-    Quiz
+    Quiz,
+    Category,
+    User,
+    Image
 
 }
