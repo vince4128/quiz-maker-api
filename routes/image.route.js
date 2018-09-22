@@ -1,6 +1,8 @@
 const   express = require("express"),
         router  = express.Router({mergeParams:true}),
-        Image = require("../models/image.model");
+        Image = require("../models/image.model"),
+        passport        = require("passport"),
+        requireAuth     = passport.authenticate('jwt', {session:false});
 
 //Index show all item
 router.get("/",(req,res)=>{
@@ -12,7 +14,7 @@ router.get("/",(req,res)=>{
 });
 
 //Create add a new image
-router.post("/", (req,res)=>{
+router.post("/", requireAuth, (req,res)=>{
 
     //uploader un fichier, recuperer le nom
     const title = req.body.title;
@@ -45,7 +47,7 @@ router.get("/:id", (req, res)=>{
 });
 
 //UPDATE ROUTE
-router.put("/:id", (req, res)=>{
+router.put("/:id", requireAuth, (req, res)=>{
     //req.body.blog.body = req.sanitize(req.body.blog.body);
     Image.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedImage)=>{
         if(err){
@@ -58,7 +60,7 @@ router.put("/:id", (req, res)=>{
 });
 
 //DELETE ROUTE
-router.delete("/:id", (req, res)=>{
+router.delete("/:id", requireAuth, (req, res)=>{
 
     //find the image with the provided ID
     Image.findById(req.params.id,(err, foundImage)=>{

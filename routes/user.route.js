@@ -1,9 +1,12 @@
 const   express = require("express"),
         router  = express.Router({mergeParams:true});
-        User = require("../models/user.model"); 
+        User = require("../models/user.model"),
+        passport        = require("passport"),
+        requireAuth     = passport.authenticate('jwt', {session:false}),
+        requireSignin   = passport.authenticate('local', {session:false});
 
 //Index show all item
-router.get("/",(req,res)=>{
+router.get("/", (req,res) => {
 
     //get all item from db
     User.find({}, (err, alluser)=>{
@@ -40,7 +43,7 @@ router.post("/", (req,res)=>{
 
 // SHOW - shows more info about one particular user
 
-router.get("/:id", function(req, res){
+router.get("/:id", requireAuth, function(req, res){
     //find the user with the provided ID
     User.findById(req.params.id,(err, foundUser)=>{
         if(err){
@@ -53,7 +56,7 @@ router.get("/:id", function(req, res){
 });
 
 //UPDATE ROUTE
-router.put("/:id", function(req, res){
+router.put("/:id", requireAuth, function(req, res){
     //req.body.blog.body = req.sanitize(req.body.blog.body);
     User.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedUser)=>{
         if(err){
@@ -66,7 +69,7 @@ router.put("/:id", function(req, res){
 });
 
 //DELETE ROUTE
-router.delete("/:id", function(req, res){
+router.delete("/:id", requireAuth, function(req, res){
     User.findByIdAndRemove(req.params.id, function(err){
         if(err){
             console.log(err);

@@ -1,6 +1,8 @@
-const   express = require("express"),
-        router  = express.Router({mergeParams:true});
-        Category = require("../models/Category.model");   
+const   express         = require("express"),
+        router          = express.Router({mergeParams:true}),
+        Category        = require("../models/Category.model"),
+        passport        = require("passport"),
+        requireAuth     = passport.authenticate('jwt', {session:false});
 
 //Index show all categories
 router.get("/",(req,res)=>{
@@ -12,7 +14,7 @@ router.get("/",(req,res)=>{
 });
 
 //Create add a new category to data
-router.post("/", (req,res)=>{
+router.post("/", requireAuth, (req,res)=>{
     if(!req.body){
         return res.status(400).send('Request body is missing')
     }
@@ -34,7 +36,7 @@ router.post("/", (req,res)=>{
 });
 
 // SHOW - shows more info about one particular category
-router.get("/:id", function(req, res){
+router.get("/:id", (req, res) => {
     //find the category with the provided ID
     Category.findById(req.params.id,(err, foundCategory)=>{
         if(err){
@@ -47,7 +49,7 @@ router.get("/:id", function(req, res){
 });
 
 //UPDATE ROUTE
-router.put("/:id", function(req, res){
+router.put("/:id", requireAuth, (req, res) => {
     //req.body.blog.body = req.sanitize(req.body.blog.body);
     Category.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedCategory)=>{
         if(err){
@@ -60,7 +62,7 @@ router.put("/:id", function(req, res){
 });
 
 //DELETE ROUTE
-router.delete("/:id", function(req, res){
+router.delete("/:id", requireAuth, (req, res) => {
     Category.findByIdAndRemove(req.params.id, function(err){
         if(err){
             console.log(err);

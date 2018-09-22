@@ -3,7 +3,9 @@ const   express = require("express"),
         Image = require("../models/image.model"),
         crypto  = require('crypto'),
         path    = require('path'),
-        multer  = require("multer");     
+        multer  = require("multer"),
+        passport        = require("passport"),
+        requireAuth     = passport.authenticate('jwt', {session:false});
 
 const storage = multer.diskStorage({    
     destination: './upload/',
@@ -50,7 +52,7 @@ const storage = multer.diskStorage({
 upload = multer({storage});
 
 //Create add a new upload
-router.post("/", upload.single('file'), (req,res)=>{
+router.post("/", requireAuth, upload.single('file'), (req,res)=>{
 
     //fonctionne
     console.log('upload route', req.body, req.file, req.file.originalname);

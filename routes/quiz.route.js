@@ -1,6 +1,8 @@
 const   express = require("express"),
         router  = express.Router({mergeParams:true}),        
-        Quiz    = require("../models/Quiz.model");
+        Quiz    = require("../models/Quiz.model"),
+        passport        = require("passport"),
+        requireAuth     = passport.authenticate('jwt', {session:false});
 
 // Index show all quiz
 router.get("/", (req,res)=>{
@@ -15,7 +17,7 @@ router.get("/", (req,res)=>{
 })
 
 // Add a quiz
-router.post("/", (req,res)=>{
+router.post("/", requireAuth, (req,res)=>{
     
     if(!req.body){
         return res.status(400).send('Request body is missing')
@@ -56,7 +58,7 @@ router.get("/:id", (req,res)=>{
 })
 
 // update a quiz
-router.put("/:id", (req,res)=>{    
+router.put("/:id", requireAuth, (req,res)=>{    
     Quiz.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedQuiz)=>{
         if(err){
             console.log(err);
@@ -68,7 +70,7 @@ router.put("/:id", (req,res)=>{
 });
 
 // delete a quiz
-router.delete("/:id", (req,res)=>{
+router.delete("/:id", requireAuth, (req,res)=>{
     Quiz.findByIdAndRemove(req.params.id, (err)=>{
         if(err){
             console.log(err);
