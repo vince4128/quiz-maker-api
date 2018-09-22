@@ -1,13 +1,15 @@
 const   quizRoute      = require("./quiz.route"),
         categoryRoute  = require("./category.route"),
         userRoute      = require("./user.route"),
-        imageRoute     = require("./image.route");
+        imageRoute     = require("./image.route"),
+        uploadRoute    = require("./upload.route");
 
 module.exports = {
 
     quizRoute,
     categoryRoute,
     userRoute,
-    imageRoute
+    imageRoute,
+    uploadRoute
 
 }
