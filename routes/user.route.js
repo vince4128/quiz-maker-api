@@ -1,9 +1,8 @@
 const   express = require("express"),
         router  = express.Router({mergeParams:true});
-        User = require("../models/user.model"),
+        User = require("../models/User.model"),
         passport        = require("passport"),
-        requireAuth     = passport.authenticate('jwt', {session:false}),
-        requireSignin   = passport.authenticate('local', {session:false});
+        requireAuth     = passport.authenticate('jwt', {session:false})
 
 //Index show all item
 router.get("/", (req,res) => {
@@ -26,9 +25,10 @@ router.post("/", (req,res)=>{
     //recuperer l'auteur dans la collection user
     const email = req.body.email;
     const pseudo = req.body.pseudo;
-    const password = req.body.password;    
+    const password = req.body.password;
+    const admin = req.body.admin;    
     
-    const newUser = {email,password, pseudo};
+    const newUser = {email,password,pseudo,admin};
 
     //create a new item and add it to the db
     User.create(newUser, (err,newlyCreated)=>{
