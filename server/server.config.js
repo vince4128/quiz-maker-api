@@ -24,14 +24,15 @@ module.exports = {
                 'http://localhost:3000',
                 'http://127.0.0.1:5500', 
                 'http://localhost:5500'
-            ];
-            const origin = req.headers.origin;
-            if(allowedOrigins.indexOf(origin) > -1){
-                res.setHeader('Access-Control-Allow-Origin', origin);
-            }
+                ];
+                const origin = req.headers.origin;
+                if(allowedOrigins.indexOf(origin) > -1){
+                     res.setHeader('Access-Control-Allow-Origin', origin);
+                }
+    
 
-            res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-            res.setHeader('Acess-Control-Allow-Headers', 'X-Requested-With,Content-Type,authorization');
+                res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+                res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type,authorization');
 
             // Set to true if you need the website to include cookies in the requests sent
             // to the API (e.g. in case you use sessions)
