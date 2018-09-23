@@ -2,7 +2,8 @@ const   quizRoute      = require("./quiz.route"),
         categoryRoute  = require("./category.route"),
         userRoute      = require("./user.route"),
         imageRoute     = require("./image.route"),
-        uploadRoute    = require("./upload.route");
+        uploadRoute    = require("./upload.route"),
+        authRoute      = require("./auth.route");
 
 module.exports = {
 
@@ -10,6 +11,7 @@ module.exports = {
     categoryRoute,
     userRoute,
     imageRoute,
-    uploadRoute
+    uploadRoute,
+    authRoute
 
 }
