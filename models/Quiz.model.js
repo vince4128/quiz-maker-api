@@ -6,7 +6,7 @@ const questionSchema = new Schema({
     statement:String,
     proposal:[
         {
-            text:String,Value:Boolean
+            text:String,value:Boolean
         }
     ],
     feedback:{
