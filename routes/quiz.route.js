@@ -100,6 +100,38 @@ router.put("/:id", (req,res)=>{
     });
 });
 
+// update a question
+router.put("/:id/question/edit/:qid", (req,res)=>{    
+    Quiz.findById(req.params.id, (err, foundQuiz) => {
+        if(err){
+            console.log(err);            
+        }else{
+
+            let questionToUpdate = {};
+
+            foundQuiz.question.map((q) => {
+                if(q._id == req.params.qid){
+                    questionToUpdate = q;
+                }
+            })
+
+            questionToUpdate.statement = req.body.statement;
+            questionToUpdate.proposal = req.body.proposal;
+            questionToUpdate.feedback = req.body.feedback;
+
+            foundQuiz.save((err, q)=>{
+                if(err){
+                    console.log(err);
+                }else{
+                    console.log(q);
+                }
+            })
+
+            res.send(questionToUpdate);
+        }
+    })
+});
+
 // delete a quiz
 router.delete("/:id", requireAuth, (req,res)=>{
     Quiz.findByIdAndRemove(req.params.id, (err)=>{
@@ -111,5 +143,36 @@ router.delete("/:id", requireAuth, (req,res)=>{
         }
     })
 })
+
+// delete a question
+router.delete("/:id/question/:qid", requireAuth, (req,res)=>{
+    console.log("#####DELETE QUESTION");
+    Quiz.findById(req.params.id, (err, foundQuiz) => {
+        if(err){
+            console.log(err);            
+        }else{
+
+            const filteredQuestion = foundQuiz.question.filter((q) => {
+                return q._id != req.params.qid
+            });
+
+            console.log("filteredQuestion " + filteredQuestion);
+
+            foundQuiz.question = filteredQuestion
+
+            foundQuiz.save((err, q)=>{
+                if(err){
+                    console.log(err);
+                }else{
+                    console.log(q);
+                }
+            })
+
+            res.send(filteredQuestion);
+
+        }
+    })
+})
+
 
 module.exports = router;
