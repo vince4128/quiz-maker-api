@@ -88,6 +88,23 @@ router.get("/:id", (req,res)=>{
     })
 })
 
+// show a question
+router.get("/:id/:qid", (req,res) => {
+    Quiz.findById(req.params.id, (err, foundQuiz) => {
+        if(err){
+            console.log(err);
+        }else{
+            let questionToUpdate = {};
+            foundQuiz.question.map((q) => {
+                if(q._id == req.params.qid){
+                    questionToUpdate = q;
+                }
+            })
+            res.send(questionToUpdate);
+        }
+    })
+})
+
 // update a quiz
 router.put("/:id", (req,res)=>{    
     Quiz.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedQuiz)=>{
