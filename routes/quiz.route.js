@@ -56,8 +56,9 @@ router.post("/:id/question", requireAuth, (req,res) => {
             const feedback = req.body.feedback;
             const type = req.body.type;
             const proposal = req.body.proposal;
+            const image = req.body.image;
 
-            const newQuestion = {statement, feedback, type, proposal};
+            const newQuestion = {statement, feedback, type, proposal, image};
 
             foundQuiz.question.push(newQuestion);
 

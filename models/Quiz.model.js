@@ -4,6 +4,7 @@ const   mongoose    = require("mongoose");
 const questionSchema = new Schema({
     type:String,
     statement:String,
+    image:String,
     proposal:[
         {
             text:String,value:Boolean

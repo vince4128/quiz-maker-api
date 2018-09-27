@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const imageSchema = new Schema({
     title:String,
+    image:String,
     date: { type: Date, default: Date.now }
 });
 
