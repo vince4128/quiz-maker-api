@@ -1,13 +1,14 @@
 const   bodyParser      = require("body-parser"),
         methodOverride  = require("method-override"),
-        express         = require("express")
+        express         = require("express"),
+        path            = require('path');
 
 const PORT = process.env.PORT || 3000;
 
 module.exports = {
 
     config:function(app){
-        app.use('/upload',express.static(__dirname+'/upload'));
+        app.use(express.static('upload'));
         app.use(bodyParser.json());
         app.use(methodOverride('_method'));
         app.use((req,res,next)=>{
