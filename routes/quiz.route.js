@@ -136,6 +136,7 @@ router.put("/:id/question/edit/:qid", (req,res)=>{
             questionToUpdate.statement = req.body.statement;
             questionToUpdate.proposal = req.body.proposal;
             questionToUpdate.feedback = req.body.feedback;
+            questionToUpdate.image = req.body.image;
 
             foundQuiz.save((err, q)=>{
                 if(err){
