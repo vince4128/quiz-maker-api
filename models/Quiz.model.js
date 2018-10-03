@@ -24,7 +24,8 @@ const quizSchema = new Schema({
     introduction:String,
     date:{ type:Date, default:Date.now},
     question:[questionSchema],
-    image:String
+    image:String,
+    feedback:{bad:String, good:String}
 });
 
 const Quiz = mongoose.model("Quiz", quizSchema);
