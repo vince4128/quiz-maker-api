@@ -30,8 +30,9 @@ router.post("/", requireAuth, (req,res)=>{
     const introduction = req.body.introduction;
     const question = req.body.question;
     const image = req.body.image;
+    const feedback = req.body.feedback;
 
-    const newQuiz = {title,author,category,description,introduction,question,image};
+    const newQuiz = {title,author,category,description,introduction,question,image,feedback};
 
     Quiz.create(newQuiz, (err,newlyCreated)=>{
         if(err){
@@ -50,7 +51,7 @@ router.post("/:id/question", requireAuth, (req,res) => {
     Quiz.findById(req.params.id, (err, foundQuiz) => {
         if(err){
             console.log(err);            
-        }else{
+        }else{            
 
             const statement = req.body.statement;
             const feedback = req.body.feedback;
