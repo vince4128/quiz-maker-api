@@ -1,5 +1,6 @@
 const   mongoose        = require("mongoose"),
-        db              = "mongodb://127.0.0.1/quizmaker?connectTimeoutMS=5000";
+        //db              = "mongodb://127.0.0.1/quizmaker?connectTimeoutMS=5000";
+        db              = "mongodb://mongo:27017/docker-node-mongo";
 
 module.exports = {
 
