@@ -1,6 +1,6 @@
 const   express = require("express"),
         router  = express.Router({mergeParams:true}),
-        Image = require("../models/image.model"),
+        Image = require("../models/Image.model"),
         passport        = require("passport"),
         requireAuth     = passport.authenticate('jwt', {session:false});
 
