@@ -7,9 +7,9 @@ const   express = require("express"),
 // Index show all quiz
 router.get("/", (req,res)=>{
     //get all otem from db
-    Quiz.find({}).populate("author","-password -created -__v").exec((err, allQuiz)=>{
+    Quiz.find({}).populate("author","-password -created -__v").populate("category", "title").exec((err, allQuiz)=>{
         if(err){
-            console.log(err)
+            console.log(err);
         }else{
             res.send(allQuiz);
         }
